@@ -1,4 +1,4 @@
-package utilsOsTools
+package ostools
 
 import (
 	"errors"
@@ -14,7 +14,7 @@ func getOsType() string {
 	return runtime.GOROOT()
 }
 
-func useOsAdept(winfn func(), linuxfn func(), macfn func()) {
+func UseOsAdept(winfn func(), linuxfn func(), macfn func()) {
 	err := errors.New("not support")
 	switch os.Getegid() {
 	case 0:
