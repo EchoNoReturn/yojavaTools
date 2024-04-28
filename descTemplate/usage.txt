@@ -1,0 +1,5 @@
+切换全局Java版本请使用：
+yojava use -g <name>
+
+设置当前会话java版本请使用
+yojava use name

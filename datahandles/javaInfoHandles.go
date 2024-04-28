@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"text/tabwriter"
 )
 
 type JavaData struct {
@@ -26,7 +27,7 @@ func AddJava2Json(data JavaData){
 		fmt.Println("格式化java版本数据失败:", err)
 	  return
 	}
-	err = os.WriteFile("data.json", newData, 0644)
+	err = os.WriteFile("config/data.json", newData, 0644)
 	if err!= nil {
 		fmt.Println("写入java版本数据失败:", err)
 	  return
@@ -61,7 +62,7 @@ func RemoveJavaFromJson(name string){
 		fmt.Println(err)
 	  return
 	}
-	err = os.WriteFile("data.json", newData, 0644)
+	err = os.WriteFile("config/data.json", newData, 0644)
 	if err!= nil {
 		fmt.Println(err)
 	  return
@@ -71,17 +72,26 @@ func RemoveJavaFromJson(name string){
 
 /* 打印Java版本数据 */
 func PrintJavaList(list []JavaData){
-	fmt.Println("Name", "\t", "Version", "\t", "Path")
+	fmt.Print("本地Java版本列表:\n\n")
+	w := tabwriter.NewWriter(os.Stdout, 8, 8, 0, '\t', 0)
+	fmt.Fprintf(w, "Name\t\tVersion\t\tPath\n")
 	for _, data := range list {
-		fmt.Println(data.Name, "\t", data.Version, "\t", data.Path)
+		fmt.Fprintf(w, "%s\t\t%s\t\t%s\n", data.Name, data.Version, data.Path)
 	}
+	w.Flush()
+	data, err := os.ReadFile("descTemplate/usage.txt")
+	if err != nil {
+	  fmt.Println("读取使用说明失败:", err)
+	  return
+	}
+	fmt.Println("\n",string(data))
 }
 
 /*
 获取本机中收录的java版本
 */
 func GetLocalJava() ([]JavaData, error) {
-	data, err := os.ReadFile("data.json")
+	data, err := os.ReadFile("config/data.json")
 	if err != nil {
 		return nil, err
 	}

@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	list "github.com/EchoNoReturn/yojavaTools/command"
+	list "github.com/EchoNoReturn/yojavaTools/command/list"
+	manager "github.com/EchoNoReturn/yojavaTools/command/manager"
 	value "github.com/EchoNoReturn/yojavaTools/common"
 	"github.com/mkideal/cli"
 )
@@ -13,6 +14,7 @@ func main() {
 	if err := cli.Root(root,
 		cli.Tree(help),
 		cli.Tree(list.ListCommand),
+		cli.Tree(&manager.Add),
 	).Run(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
