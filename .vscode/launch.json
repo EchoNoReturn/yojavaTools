@@ -5,13 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Package",
+      "name": "add command debug",
       "type": "go",
       "request": "launch",
       "mode": "debug",
       "program": "${workspaceFolder}",
       "showGlobalVariables": false,
       "args": ["add", "/usr"]
+    },
+    {
+      "name": "remove command debug",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}",
+      "showGlobalVariables": false,
+      "args": ["remove", "1.8"]
     }
   ]
 }

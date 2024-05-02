@@ -15,6 +15,7 @@ func main() {
 		cli.Tree(help),
 		cli.Tree(list.ListCommand),
 		cli.Tree(&manager.Add),
+		cli.Tree(&manager.Remove),
 	).Run(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

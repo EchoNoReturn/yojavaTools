@@ -19,12 +19,13 @@ type AddOptions struct {
 
 var Add = cli.Command{
 	Name:  "add",
-	Desc:  "添加 java 到 yojava",
+	Desc:  "add [JavaHomePath] 以添加 java 到 yojava",
 	Argv:  func() interface{} { return new(AddOptions) },
 	Fn: func(ctx *cli.Context) error {
 		pathList := ctx.Args()
 		if len(pathList) == 0 {
 			println("未能获取到Java路径\n使用方式：yojava add java路径1 java路径2 ...\n例如：yojava add /usr/lib/jvm/java-11-openjdk-amd64/ /usr/lib/jvm/java-8-openjdk-amd64/")
+			return nil
 		}
 		for i := 0; i < len(pathList); i++ {
 			version, err := getJdkVersion(pathList[i])
