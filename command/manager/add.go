@@ -17,10 +17,10 @@ type AddOptions struct {
 	cli.Helper
 }
 
-var Add = cli.Command{
-	Name:  "add",
-	Desc:  "add [JavaHomePath] 以添加 java 到 yojava",
-	Argv:  func() interface{} { return new(AddOptions) },
+var Add = &cli.Command{
+	Name: "add",
+	Desc: "add [JavaHomePath] 以添加 java 到 yojava",
+	Argv: func() interface{} { return new(AddOptions) },
 	Fn: func(ctx *cli.Context) error {
 		pathList := ctx.Args()
 		if len(pathList) == 0 {
@@ -44,7 +44,7 @@ var Add = cli.Command{
 */
 func getJdkVersion(path string) (string, error) {
 	// 先判断路径是否存在
-	if _, err := exec.LookPath(path+"/bin/java"); err!= nil {
+	if _, err := exec.LookPath(path + "/bin/java"); err != nil {
 		err := errors.New("路径 " + path + " 下不存在Java文件")
 		return "", err
 	}
@@ -65,8 +65,8 @@ func getJdkVersion(path string) (string, error) {
 /* 创建JavaData对象内容 */
 func createJavaInfo(path string, version string) javaInfoHandle.JavaData {
 	return javaInfoHandle.JavaData{
-		Name: "java" + version,
+		Name:    "java" + version,
 		Version: version,
-		Path: path,
+		Path:    path,
 	}
 }

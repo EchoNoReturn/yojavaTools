@@ -14,8 +14,9 @@ func main() {
 	if err := cli.Root(root,
 		cli.Tree(help),
 		cli.Tree(list.ListCommand),
-		cli.Tree(&manager.Add),
-		cli.Tree(&manager.Remove),
+		cli.Tree(manager.Add),
+		cli.Tree(manager.Remove),
+		cli.Tree(manager.Use),
 	).Run(os.Args[1:]); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

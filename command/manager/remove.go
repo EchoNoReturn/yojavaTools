@@ -12,7 +12,7 @@ type RemoveOpts struct {
 	cli.Helper
 }
 
-var Remove = cli.Command{
+var Remove = &cli.Command{
 	Name: "rm",
 	Desc: "rm [Name/Version] 以删除已添加的java版本,支持版本号模糊匹配(从版本号开头开始匹配)，支持同时删除多个",
 	Argv: func() interface{} { return new(RemoveOpts) },
@@ -25,7 +25,7 @@ var Remove = cli.Command{
 		for i := 0; i < len(rmList); i++ {
 			isOk, err := javaInfoHandle.RemoveJavaFromJson(rmList[i])
 			if err != nil {
-				fmt.Println("删除" + rmList[i] + "失败:", err)
+				fmt.Println("删除"+rmList[i]+"失败:", err)
 				return err
 			} else if isOk {
 				fmt.Println("删除" + rmList[i] + "成功")

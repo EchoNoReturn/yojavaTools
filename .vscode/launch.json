@@ -20,7 +20,7 @@
       "mode": "debug",
       "program": "${workspaceFolder}",
       "showGlobalVariables": false,
-      "args": ["remove", "1.8"]
+      "args": ["rm", "1.8"]
     }
   ]
 }
